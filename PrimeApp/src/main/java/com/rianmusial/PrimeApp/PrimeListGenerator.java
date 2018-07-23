@@ -2,6 +2,7 @@ package com.rianmusial.PrimeApp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class PrimeListGenerator {
 	
@@ -74,6 +75,40 @@ public class PrimeListGenerator {
 				subsetPrimes.add((long) i);
 		}
 		return subsetPrimes;
+	}
+	
+	public static void main(String[] args) {
+		PrimeListGenerator plg = PrimeListGenerator.getInstance();
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("The application will calculate all primes between two numbers you provide.");
+		boolean continueLooping = true;
+		while(continueLooping) {
+			System.out.println("Please provide the first number:");
+			int x = Integer.parseInt(scanner.nextLine());
+			System.out.println("Please provide the second number:");
+			int y = Integer.parseInt(scanner.nextLine());
+			
+			List<Long> list = plg.getPrimesBetween(x, y);
+			System.out.println("The primes between your numbers are as follows: " + list);
+			
+			continueLooping = getUserBoolean(scanner, "Do you wish to try another combination? (Y/N)");
+		}
+		System.out.println("Shutting down.");
+	}
+
+	private static boolean getUserBoolean(Scanner scanner, String message) {
+		System.out.println(message);
+		String userBoolean = scanner.nextLine();
+		Character c = userBoolean.toUpperCase().charAt(0);
+		switch(c) {
+			case 'Y':
+				return true;
+			case 'N':
+				return false;
+			default:
+				System.out.println("Unrecognized input.");
+				return getUserBoolean(scanner, message);
+		}
 	}
 
 }

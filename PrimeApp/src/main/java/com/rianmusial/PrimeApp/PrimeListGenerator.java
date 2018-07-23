@@ -10,7 +10,7 @@ public class PrimeListGenerator {
 		generatePrimes(maxNum);
 	}
 	
-	public static PrimeListGenerator getInstance() {
+	public static synchronized PrimeListGenerator getInstance() {
 		if (instance == null)
 			instance = new PrimeListGenerator();
 		return instance;
@@ -64,7 +64,7 @@ public class PrimeListGenerator {
 		return primeStates;
 	}
 
-	public List<Long> getPrimesBetween(int x, int y) {
+	public synchronized List<Long> getPrimesBetween(int x, int y) {
 		if (y > maxNum)
 			generatePrimes(y);
 		
